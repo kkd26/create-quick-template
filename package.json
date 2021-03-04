@@ -1,0 +1,36 @@
+{
+  "name": "create-quick-template",
+  "version": "1.0.1",
+  "bin": "./dist/index.js",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "build": "tsc && shx rm -rf dist/templates && shx cp -r src/templates dist"
+  },
+  "author": "Krzysztof Druciarek",
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kkd26/create-quick-template.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kkd26/create-quick-template/issues"
+  },
+  "homepage": "https://github.com/kkd26/create-quick-template#readme",
+  "description": "A basic project generator from templates.",
+  "devDependencies": {
+    "@types/ejs": "^3.0.6",
+    "@types/inquirer": "^7.3.1",
+    "@types/node": "^14.14.31",
+    "@types/shelljs": "^0.8.8",
+    "nodemon": "^2.0.7",
+    "shx": "^0.3.3",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.2"
+  },
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "inquirer": "^8.0.0",
+    "shelljs": "^0.8.4"
+  }
+}
