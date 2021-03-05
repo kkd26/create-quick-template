@@ -1,7 +1,9 @@
 {
   "name": "create-quick-template",
-  "version": "2.1.0",
-  "bin": "./dist/index.js",
+  "version": "2.1.1",
+  "bin": {
+    "create-quick-template": "dist/index.js"
+  },
   "main": "src/index.ts",
   "scripts": {
     "start": "ts-node src/index.ts",
