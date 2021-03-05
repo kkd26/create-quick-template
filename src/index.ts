@@ -20,6 +20,12 @@ const QUESTIONS = [
     type: 'input',
     message: 'New project name?',
   },
+  {
+    name: 'npm_install',
+    type: 'list',
+    message: 'Do you want to run npm install?',
+    choices: ['yes', 'no'],
+  },
 ];
 
 export interface CliOptions {
@@ -48,7 +54,7 @@ inquirer.prompt(QUESTIONS).then((answers) => {
   }
   createDirectoryContents(templatePath, projectName);
 
-  postProcess(options);
+  if (answers['npm_install'] === 'yes') postProcess(options);
 });
 
 function createProject(projectPath: string) {
@@ -64,6 +70,7 @@ function createProject(projectPath: string) {
 }
 
 const SKIP_FILES = ['node_modules', '.template.json'];
+const NO_RENDER = ['.ico', '.png', '.jpg', '.jpeg', '.mp3', '.mp4'];
 
 function createDirectoryContents(templatePath: string, projectName: string) {
   // read all files/folders (1 level) from template folder
@@ -71,6 +78,7 @@ function createDirectoryContents(templatePath: string, projectName: string) {
   // loop each file/folder
   filesToCreate.forEach((file) => {
     const origFilePath = path.join(templatePath, file);
+    const extname = path.extname(origFilePath);
 
     // get stats about the current file
     const stats = fs.statSync(origFilePath);
@@ -79,13 +87,17 @@ function createDirectoryContents(templatePath: string, projectName: string) {
     if (SKIP_FILES.indexOf(file) > -1) return;
 
     if (stats.isFile()) {
-      // read file content and transform it using template engine
-      let contents = fs.readFileSync(origFilePath, 'utf8');
-      contents = template.render(contents, { projectName });
-
-      // write file to destination folder
       const writePath = path.join(CURR_DIR, projectName, file);
-      fs.writeFileSync(writePath, contents, 'utf8');
+
+      if (NO_RENDER.includes(extname)) {
+        fs.writeFileSync(writePath, fs.readFileSync(origFilePath));
+      } else {
+        // read file content and transform it using template engine
+        let contents = fs.readFileSync(origFilePath, 'utf8');
+        contents = template.render(contents, { projectName });
+        // write file to destination folder
+        fs.writeFileSync(writePath, contents, 'utf8');
+      }
     } else if (stats.isDirectory()) {
       // create folder in destination folder
       fs.mkdirSync(path.join(CURR_DIR, projectName, file));
