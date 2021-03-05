@@ -2,15 +2,20 @@
   "name": "create-quick-template",
   "version": "2.1.4",
   "bin": {
-    "create-quick-template": "dist/index.js"
+    "create-quick-template": "dist/index.js",
+    "cqt": "dist/index.js"
   },
-  "main": "src/index.ts",
+  "main": "dist/index.ts",
   "scripts": {
     "start": "ts-node src/index.ts",
     "build": "tsc && shx rm -rf dist/templates && shx cp -r src/templates dist",
     "prepack": "npm run build"
   },
-  "author": "Krzysztof Druciarek",
+  "author": {
+    "name": "Krzysztof Druciarek",
+    "email": "kkd26@cam.ac.uk",
+    "url": "https://chriswire.dev"
+  },
   "license": "GPL-3.0",
   "repository": {
     "type": "git",
@@ -20,7 +25,13 @@
     "url": "https://github.com/kkd26/create-quick-template/issues"
   },
   "homepage": "https://github.com/kkd26/create-quick-template#readme",
-  "description": "A basic project generator from templates.",
+  "description": "Project template manager and from-template creator.",
+  "keywords": [
+    "template",
+    "node",
+    "creator",
+    "manager"
+  ],
   "devDependencies": {
     "@types/ejs": "^3.0.6",
     "@types/inquirer": "^7.3.1",
