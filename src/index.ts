@@ -70,6 +70,7 @@ function createProject(projectPath: string) {
 }
 
 const SKIP_FILES = ['node_modules', '.template.json'];
+const SKIP_EXT = ['.rest'];
 const NO_RENDER = ['.ico', '.png', '.jpg', '.jpeg', '.mp3', '.mp4'];
 
 function createDirectoryContents(templatePath: string, projectName: string) {
@@ -85,6 +86,7 @@ function createDirectoryContents(templatePath: string, projectName: string) {
 
     // skip files that should not be copied
     if (SKIP_FILES.indexOf(file) > -1) return;
+    if (SKIP_EXT.indexOf(extname) > -1) return;
 
     if (stats.isFile()) {
       const writePath = path.join(CURR_DIR, projectName, file);
