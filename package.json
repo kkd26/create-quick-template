@@ -1,6 +1,6 @@
 {
   "name": "create-quick-template",
-  "version": "2.1.5",
+  "version": "2.2.0",
   "bin": {
     "create-quick-template": "dist/index.js",
     "cqt": "dist/index.js"
